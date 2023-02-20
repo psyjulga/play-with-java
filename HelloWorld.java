@@ -108,7 +108,8 @@ class HelloWorld {
 		System.out.println(Arrays.toString(splitted));
 		// Arrays.toString !!!!
 
-		for (String a : splitted) System.out.println(a);
+		for (String a : splitted)
+			System.out.println(a);
 
 		System.out.println(splitted[splitted.length - 1]);
 		// print last word of a given sentence
@@ -128,9 +129,11 @@ class HelloWorld {
 		}
 
 		for (int j = 0; j <= 10; j++) {
-			if (j == 3) continue;
+			if (j == 3)
+				continue;
 			// Diese Iteration wird übersprungen
-			if (j == 8) break;
+			if (j == 8)
+				break;
 			// Die Schleife wird abgebrochen
 			System.out.println(j);
 		}
@@ -144,8 +147,7 @@ class HelloWorld {
 	}
 
 	public static void goethe() throws Exception {
-		String file =
-			"C:\\Users\\admin\\OneDrive\\Desktop\\Privat\\coding\\Java\\goethe.txt";
+		String file = "C:\\Users\\admin\\OneDrive\\Desktop\\Privat\\coding\\Java Udemy\\goethe.txt";
 		Scanner input = new Scanner(Paths.get(file));
 
 		int countIch = 0;
@@ -155,8 +157,10 @@ class HelloWorld {
 			String word = input.next();
 			word = word.toLowerCase();
 
-			if (word.equals("ich")) countIch++;
-			if (word.equals("sie")) countSie++;
+			if (word.equals("ich"))
+				countIch++;
+			if (word.equals("sie"))
+				countSie++;
 
 			System.out.println("Ich: " + countIch);
 			System.out.println("Sie: " + countSie);
@@ -178,14 +182,16 @@ class HelloWorld {
 		String[] cats = new String[numCats];
 		System.out.println("Bitte gebe die Katzennamen ein!");
 
-		for (int i = 0; i < cats.length; i++) cats[i] = input.next();
+		for (int i = 0; i < cats.length; i++)
+			cats[i] = input.next();
 
 		System.out.println(Arrays.toString(cats));
 
 		// for each
 		String os[] = { "Windows", "Linux", "Mac" };
 
-		for (String el : os) System.out.println(el);
+		for (String el : os)
+			System.out.println(el);
 	}
 
 	public static void moreAboutArrays() {
@@ -224,10 +230,10 @@ class HelloWorld {
 			}
 		}
 
-		if (game[0][0] == game[1][1] && game[0][0] == game[2][2]) playerWon =
-			game[0][0];
-		if (game[2][0] == game[1][1] && game[2][0] == game[0][2]) playerWon =
-			game[2][0];
+		if (game[0][0] == game[1][1] && game[0][0] == game[2][2])
+			playerWon = game[0][0];
+		if (game[2][0] == game[1][1] && game[2][0] == game[0][2])
+			playerWon = game[2][0];
 
 		System.out.println(playerWon);
 	}
@@ -238,9 +244,9 @@ class HelloWorld {
 		int sum = 0;
 
 		// for (int i=0; i<arr.length; i++){
-		//     for (int j=0; j<arr[i].length;j++){
-		//         sum += arr[i][j];
-		//     }
+		// for (int j=0; j<arr[i].length;j++){
+		// sum += arr[i][j];
+		// }
 		// }
 
 		for (int[] array : arr) {
@@ -274,14 +280,17 @@ class HelloWorld {
 		// es würde reichen immer nur jeweils
 		// den ersten Wert results[0] zu vergleichen
 		for (int k = 0; k < results.length - 1; k++) {
-			if (results[k] != results[k + 1]) magic = false;
+			if (results[k] != results[k + 1])
+				magic = false;
 		}
 
 		System.out.println(Arrays.toString(results));
 
-		if (magic) System.out.println("Magic Array"); else System.out.println(
-			"Simple Array"
-		);
+		if (magic)
+			System.out.println("Magic Array");
+		else
+			System.out.println(
+					"Simple Array");
 	}
 
 	// Objektorientierung
@@ -324,7 +333,7 @@ class HelloWorld {
 
 	// WEATHER PROJECT
 	public static void weatherProject()
-		throws SAXException, IOException, ParserConfigurationException {
+			throws SAXException, IOException, ParserConfigurationException {
 		System.out.println("Für welche Stadt möchtest du das Wetter wissen?");
 
 		Scanner input = new Scanner(System.in);
@@ -448,24 +457,28 @@ class HelloWorld {
 				System.out.println(line);
 			}
 			// file reader => only basic functions
-			//  char[] output = new char[11];
-			//  r.read(output);
+			// char[] output = new char[11];
+			// r.read(output);
 			// füllt den Array
-			//  System.out.println(output);
-			//  r.read(output);
+			// System.out.println(output);
+			// r.read(output);
 			// füllt den Array erneut
 			// merkt sich den letzten Stand
-			//  System.out.println(output);
+			// System.out.println(output);
 		} catch (FileNotFoundException e) {
 			System.out.println("error by opening file");
 		} catch (IOException e) {
 			System.out.println("error by reading file");
-		} // Es können nicht beliebig viele Dateien // Resourcen immer schließen! // file = RESOURCE
-		// gleichzeitig geöffnet sein
+		}
+		// Es können nicht beliebig viele Dateien gleichzeitig geöffnet sein
+		// Kernel hat Limit
+		// file = RESOURCE
+		// Ressourcen immer schließen!
 		// "Resource leak: b is never closed"
 		finally {
 			try {
-				if (b != null) b.close();
+				if (b != null)
+					b.close();
 			} catch (IOException e2) {
 				System.out.println("error by closing file");
 			}
