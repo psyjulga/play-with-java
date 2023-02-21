@@ -521,12 +521,12 @@ class HelloWorld {
 		// magicArray();
 		// player();
 		// car();
-		// weatherProject();
+		weatherProject();
 		// superCar();
 		// interfaces();
 		// carEquals();
 		// exceptionHandling();
 		// fileReader();
-		databaseProject();
+		// databaseProject();
 	}
 }
