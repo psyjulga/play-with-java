@@ -2,12 +2,17 @@ import car.Car;
 import car.CarDriveException;
 import car.NormalCar;
 import car.SuperCar;
+import generics.DiaryEntry;
+import generics.HideMessage;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -504,6 +509,44 @@ class HelloWorld {
 		}
 	}
 
+	public static void genericClasses() {
+
+		HideMessage<String> hms = new HideMessage<String>("hidden message");
+		String hiddenMsg = hms.getMessage("test");
+		System.out.println(hiddenMsg);
+
+		DiaryEntry entry = new DiaryEntry();
+		HideMessage<DiaryEntry> hmd = new HideMessage<DiaryEntry>(entry);
+		DiaryEntry e = hmd.getMessage("test");
+		String title = e.title;
+		System.out.println(title);
+
+	}
+
+	public static void collections() {
+
+		// ArrayList
+		// Größe flexibel
+		// Java intern => Array
+		ArrayList<String> students = new ArrayList<>();
+		students.add("Erik");
+		students.add("Monika");
+		students.add("Mia");
+		students.add("Bernd");
+
+		students.remove("Erik");
+		students.remove(0);
+
+		Collections.sort(students);
+
+		// students.clear();
+		// deletes all
+
+		for (String student : students)
+			System.out.println(student);
+
+	}
+
 	// ENTRY POINT => will be run
 	public static void main(String[] args) throws Exception {
 		// aboutStrings();
@@ -521,12 +564,14 @@ class HelloWorld {
 		// magicArray();
 		// player();
 		// car();
-		weatherProject();
+		// weatherProject();
 		// superCar();
 		// interfaces();
 		// carEquals();
 		// exceptionHandling();
 		// fileReader();
 		// databaseProject();
+		// genericClasses();
+		collections();
 	}
 }
