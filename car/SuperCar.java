@@ -1,27 +1,29 @@
 package car;
 
-public class SuperCar extends NormalCar{
+public class SuperCar extends NormalCar {
   private int numZyl;
-  
+
   // must have own constructor
-  public SuperCar(String brand, int numZyl){
+  public SuperCar(String brand, int numZyl) {
     // super triggers base class constructor
     super(brand);
     this.numZyl = numZyl;
+    System.out.println(this.numZyl);
   }
+
   // Methoden überschreiben
-  // method has to match 
+  // method has to match
   // without @Override methods could
   // e.g. have different amount of params
   // java would choose the method based on
   // how it is called
   // "method overloading"
   @Override
-  public void normalDrive(){
+  public void normalDrive() {
     System.out.println("normaldrive overwritten!!");
   }
 
-  public void superDrive(){
-System.out.println("superdrive!!");
+  public void superDrive() {
+    System.out.println("superdrive!!");
   }
 }

@@ -13,20 +13,23 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
 import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import userdatabase.FileStudentDatabase;
 import userdatabase.StudentDatabase;
 import userdatabase.StudentDatabaseException;
 import weather.WeatherFetcher;
 import weather.WeatherInfo;
+import wordcount.StringOccurence;
+import wordcount.StringOccurenceAnalyzer;
 
 class HelloWorld {
 
@@ -74,14 +77,14 @@ class HelloWorld {
 	}
 
 	public static void aboutScanner() {
-		// SCANNER CLASS
-		Scanner input = new Scanner(System.in);
-
-		System.out.println("Please insert a number");
-		System.out.println(input.nextLong());
-		// waits for next input of type long
-		System.out.println("Please insert your name");
-		System.out.println(input.next());
+		try (// SCANNER CLASS
+				Scanner input = new Scanner(System.in)) {
+			System.out.println("Please insert a number");
+			System.out.println(input.nextLong());
+			// waits for next input of type long
+			System.out.println("Please insert your name");
+			System.out.println(input.next());
+		}
 	}
 
 	public static void aboutMathAndSwitch() {
@@ -180,18 +183,18 @@ class HelloWorld {
 		System.out.println(Arrays.toString(names));
 		// Arrays.toString !!
 
-		Scanner input = new Scanner(System.in);
-		System.out.println("Wie viele Katzen hast du?");
-		int numCats = input.nextInt();
+		try (Scanner input = new Scanner(System.in)) {
+			System.out.println("Wie viele Katzen hast du?");
+			int numCats = input.nextInt();
 
-		String[] cats = new String[numCats];
-		System.out.println("Bitte gebe die Katzennamen ein!");
+			String[] cats = new String[numCats];
+			System.out.println("Bitte gebe die Katzennamen ein!");
 
-		for (int i = 0; i < cats.length; i++)
-			cats[i] = input.next();
+			for (int i = 0; i < cats.length; i++)
+				cats[i] = input.next();
 
-		System.out.println(Arrays.toString(cats));
-
+			System.out.println(Arrays.toString(cats));
+		}
 		// for each
 		String os[] = { "Windows", "Linux", "Mac" };
 
@@ -326,12 +329,12 @@ class HelloWorld {
 			e.printStackTrace();
 		}
 
-		Car c2 = new Car("Opel");
+		// Car c2 = new Car("Opel");
 		// c2.drive();
 
 		// Statische Variable
-		c.numCars++;
-		c2.numCars++;
+		// c.numCars++;
+		// c2.numCars++;
 		Car.numCars++;
 		System.out.println(Car.numCars); // 3
 	}
@@ -341,19 +344,20 @@ class HelloWorld {
 			throws SAXException, IOException, ParserConfigurationException {
 		System.out.println("Für welche Stadt möchtest du das Wetter wissen?");
 
-		Scanner input = new Scanner(System.in);
-		String city = input.next();
+		try (Scanner input = new Scanner(System.in)) {
+			String city = input.next();
 
-		WeatherFetcher weather = WeatherFetcher.getInstance();
-		WeatherInfo[] infos = weather.fetchWeatherInfo(city);
-		// ich bekomme ein komplettes WeatherInfo objekt
-		// inklusive methoden etc
+			WeatherFetcher weather = WeatherFetcher.getInstance();
+			WeatherInfo[] infos = weather.fetchWeatherInfo(city);
+			// ich bekomme ein komplettes WeatherInfo objekt
+			// inklusive methoden etc
 
-		for (int x = 0; x < infos.length; x++) {
-			WeatherInfo info = infos[x];
-			String time = info.getTimestamp();
-			String temp = info.getTemperature();
-			System.out.println(time + "---" + temp);
+			for (int x = 0; x < infos.length; x++) {
+				WeatherInfo info = infos[x];
+				String time = info.getTimestamp();
+				String temp = info.getTemperature();
+				System.out.println(time + "---" + temp);
+			}
 		}
 	}
 
@@ -545,6 +549,85 @@ class HelloWorld {
 		for (String student : students)
 			System.out.println(student);
 
+		// Weitere Datenstrukturen
+		// LinkedList<>
+		// gleiche Methoden, wird anders gespeichert
+
+		// SETS => keine doppelten Einträge
+		// Set => Interface
+		Set<String> cats = new HashSet<>();
+		cats.add("Miau");
+		// unsortiert (nicht Reihenfolge der Eingabe)
+		// schnelle Abfrage durch Hashing
+		Set<String> dogs = new TreeSet<>();
+		dogs.add("Wau");
+		// automatisch sortiert
+		// schnelle Abfrage durch Baumstruktur
+
+		// ARRAY => .contains => loop durch ALLE Elemente
+		// "Vergleichsoperationen"
+
+		List<String> words = new ArrayList<>();
+		words.add("x");
+		words.add("a");
+		words.add("b");
+		words.add("a");
+
+		Set<String> items = new HashSet<>();
+
+		for (String word : words) {
+
+			if (!items.contains(word)) {
+				System.out.println(word);
+				items.add(word);
+			}
+		}
+
+		// ODER if(items.contains) => continue
+
+		// MAPS => KEY VALUE pairs
+		// hashmap => unsortiert || treemap => sortiert
+		Map<String, Integer> ages = new TreeMap<>();
+		ages.put("Julia", 36);
+		// Integer <=> int (UN)BOXING
+		ages.put("Hicham", 34);
+		// containsKey => bool
+		// get
+		// remove
+
+		for (Map.Entry<String, Integer> m : ages.entrySet()) {
+			// transforms to set to apply loop
+			System.out.println(m.getKey() + " " + m.getValue());
+
+		}
+	}
+
+	public static void wordCountProject() {
+
+		String file = "C:\\Users\\admin\\OneDrive\\Desktop\\Privat\\coding\\Java Udemy\\play-with-java\\goethe.txt";
+		ArrayList<String> words = new ArrayList<>();
+
+		Scanner input;
+
+		try {
+			input = new Scanner(Paths.get(file));
+		} catch (IOException e) {
+			System.err.println("Datei nicht lesbar");
+			e.printStackTrace();
+			return;
+			// Abbruch
+		}
+
+		while (input.hasNext())
+			words.add(input.next());
+
+		StringOccurenceAnalyzer soa = new StringOccurenceAnalyzer();
+		List<StringOccurence> analyzed = soa.analyze(words);
+
+		for (StringOccurence so : analyzed) {
+			System.out.println(so.getWord() + ": " + so.getOccurence());
+		}
+
 	}
 
 	// ENTRY POINT => will be run
@@ -572,6 +655,7 @@ class HelloWorld {
 		// fileReader();
 		// databaseProject();
 		// genericClasses();
-		collections();
+		// collections();
+		wordCountProject();
 	}
 }
